@@ -4,10 +4,12 @@ import logging
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 
+from bot.middlewares.database import DatabaseMiddleware
 from config import load_config, Config
 from bot.handlers import routers_list
 from bot.middlewares.config import ConfigMiddleware
 from bot.services import broadcaster
+from infrastructure.database.setup import create_engine, create_session_pool
 
 
 async def on_startup(bot: Bot, admin_ids: list[int]):
@@ -71,7 +73,7 @@ async def main():
 
     dp.include_routers(*routers_list)
 
-    register_global_middlewares(dp, config)
+    register_global_middlewares(dp, config, session_pool=session_pool)
 
     await on_startup(bot, config.tg_bot.admin_ids)
     await dp.start_polling(bot)
