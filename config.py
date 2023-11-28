@@ -59,7 +59,7 @@ class DbConfig:
         password = env.str("DB_PASSWORD")
         user = env.str("DB_USER")
         database = env.str("DB_NAME")
-        port = env.int("DB_PORT", 5432)
+        port = env.int("DB_PORT", default=5432)
         return DbConfig(
             host=host, password=password, user=user, database=database, port=port
         )
