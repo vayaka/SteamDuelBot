@@ -1,8 +1,8 @@
-"""initial migration
+"""initial_migrate
 
-Revision ID: 8d86810de062
+Revision ID: 1b97f90a64c2
 Revises: 
-Create Date: 2023-11-29 00:50:36.792637
+Create Date: 2023-12-13 20:37:56.537220
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
-revision: str = '8d86810de062'
+revision: str = '1b97f90a64c2'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -25,8 +25,6 @@ def upgrade() -> None:
     sa.Column('username', sa.String(length=128), nullable=True),
     sa.Column('full_name', sa.String(length=128), nullable=False),
     sa.Column('steam_id', sa.BIGINT(), nullable=True),
-    sa.Column('active', sa.Boolean(), server_default=sa.text('true'), nullable=False),
-    sa.Column('language', sa.String(length=10), server_default=sa.text("'ru'"), nullable=False),
     sa.Column('created_at', postgresql.TIMESTAMP(), server_default=sa.text('now()'), nullable=False),
     sa.PrimaryKeyConstraint('user_id')
     )
