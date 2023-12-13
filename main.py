@@ -3,7 +3,9 @@ import logging
 
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram_dialog import setup_dialogs
 
+from bot.dialogs.main_menu.setup import bot_main_menu
 from bot.middlewares.database import DatabaseMiddleware
 from config import load_config, Config
 from bot.handlers import routers_list
@@ -71,7 +73,9 @@ async def main():
     bot = Bot(token=config.tg_bot.token, parse_mode="HTML")
     dp = Dispatcher(storage=MemoryStorage())
 
+    dp.include_routers(*bot_main_menu())
     dp.include_routers(*routers_list)
+    setup_dialogs(dp)
 
     register_global_middlewares(dp, config, session_pool=session_pool)
 

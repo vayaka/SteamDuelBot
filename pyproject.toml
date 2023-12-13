@@ -16,6 +16,7 @@ yarl = "^1.9.3"
 backoff = "^2.2.1"
 alembic = "^1.12.1"
 psycopg2-binary = "^2.9.9"
+aiogram-dialog = "^2.1.0"
 
 
 [build-system]

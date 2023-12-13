@@ -46,6 +46,5 @@ if __name__ == "__main__":
             user = await repo.users.get_or_create_user(
                 user_id=12356,
                 full_name="John Doe",
-                language="en",
                 username="johndoe",
             )

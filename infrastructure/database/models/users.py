@@ -18,8 +18,8 @@ class User(Base, TimestampMixin, TableNameMixin):
         user_id (Mapped[int]): The unique identifier of the user.
         username (Mapped[Optional[str]]): The username of the user.
         full_name (Mapped[str]): The full name of the user.
-        active (Mapped[bool]): Indicates whether the user is active or not.
-        language (Mapped[str]): The language preference of the user.
+        steam_id (Mapped[Optional[int]]): The Steam ID of the user.
+        ?active (Mapped[bool]): Indicates whether the user is active or not.
 
     Methods:
         __repr__(): Returns a string representation of the User object.
@@ -35,8 +35,7 @@ class User(Base, TimestampMixin, TableNameMixin):
     username: Mapped[Optional[str]] = mapped_column(String(128))
     full_name: Mapped[str] = mapped_column(String(128))
     steam_id: Mapped[Optional[int]] = mapped_column(BIGINT)
-    active: Mapped[bool] = mapped_column(Boolean, server_default=true())
-    language: Mapped[str] = mapped_column(String(10), server_default=text("'ru'"))
+    # active: Mapped[bool] = mapped_column(Boolean, server_default=true())
 
     def __repr__(self):
-        return f"<User {self.user_id} {self.username} {self.full_name}>"
+        return f"<User {self.user_id} {self.full_name} {self.steam_id}>"
