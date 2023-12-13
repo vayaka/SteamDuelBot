@@ -1,7 +1,9 @@
 from aiogram import Router, types
 from aiogram.filters import CommandStart, Command
+from aiogram_dialog import DialogManager
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from bot.dialogs.main_menu.states import MainMenu
 from bot.misc.jokes import get_random_joke
 from infrastructure.database.models.users import User
 from infrastructure.database.repo.requests import RequestsRepo
@@ -40,8 +42,9 @@ async def help_command(message: types.Message):
 
 
 @base_router.message(Command('menu'))
-async def menu_command(message: types.Message):
-    await message.answer("Меню готово!\nТеперь выбор за тобой - будто в RPG, только без драконов! 🐉")
+async def menu_command(message: types.Message, dialog_manager: DialogManager):
+    # await message.answer("Меню готово!\nТеперь выбор за тобой - будто в RPG, только без драконов! 🐉")
+    await dialog_manager.start(MainMenu.main_menu)
 
 
 @base_router.message(Command('joke'))
